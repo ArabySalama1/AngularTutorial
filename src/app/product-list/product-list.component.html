@@ -13,7 +13,7 @@
      
       <div class='table-responsive'>
         <table class='table'
-               *ngIf='products && products.length'>
+               *ngIf='items && items.length'>
           <thead>
             <tr>
               <th>
@@ -50,7 +50,17 @@
                 </td>  
             </tr>
           </tbody>
+         
+          
         </table>
+        <div class="center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item" [ngClass]="previousBtn"><a  class="page-link" (click)="previous()"  >Previous</a></li>
+              <li class="page-item" [ngClass]="nextBtn"><a class="page-link" (click)="next()"  >Next</a></li>
+            </ul>
+          </nav>
+      </div>
       </div>
     </div>
   </div>

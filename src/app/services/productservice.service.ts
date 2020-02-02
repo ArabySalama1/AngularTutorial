@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Iproduct } from './product-list/product';
+import { Iproduct } from '../product-list/product';
 import { HttpClientModule, HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators'
@@ -12,15 +12,24 @@ export class ProductserviceService {
   private productsUrl = "http://localhost:8080/product/products";
   private productIdUrl = "http://localhost:8080/product/products/";
   private updateProductUrl = "http://localhost:8080/product/products/update";
+  private deleteProductUrl = "http://localhost:8080/product/products/delete";
+  private productsSizeUrl="http://localhost:8080/product/products/size";
+
   constructor(private http: HttpClient) {
 
   }
 
-  getProducts(): Observable<Iproduct[]> {
-    return this.http.get<Iproduct[]>(this.productsUrl).pipe(
+  getProducts(offset:number,size:number): Observable<Iproduct[]> {
+    let url=`${this.productsUrl}/${offset}/${size}`;
+    return this.http.get<Iproduct[]>(url).pipe(
       tap(this.handleData),
       catchError(this.handleError)
     );
+  }
+
+  getProductsSize(): Observable<number> {
+   
+    return this.http.get<number>(this.productsSizeUrl);
   }
 
   getProductById(id: string): Observable<Iproduct> {
@@ -35,6 +44,14 @@ export class ProductserviceService {
       catchError(this.handleError)
     );
   }
+
+  deleteProduct(id:number):Observable<string>{
+    const url=`${this.deleteProductUrl}/${id}`;
+    const headers=new HttpHeaders({'Content-Type':'application/json'});
+     return this.http.delete<string>(url,{headers}).pipe(
+       catchError(this.handleError)
+     );
+   }
 
   //You can make any changes on data before return
   private handleData(data:Iproduct[]){

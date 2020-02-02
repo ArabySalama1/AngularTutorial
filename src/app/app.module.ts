@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 
 import { FormsModule, ReactiveFormsModule }         from '@angular/forms';
 import { CustomerComponent } from './customer/customer.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 
 
@@ -24,7 +25,8 @@ import { CustomerComponent } from './customer/customer.component';
     WelcomeComponent,
     PageNotFoundComponent,
     LoginComponent,
-    CustomerComponent
+    CustomerComponent,
+    PaginatorComponent
     
   ],
   imports: [

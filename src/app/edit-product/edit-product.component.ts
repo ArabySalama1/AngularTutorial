@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControlName, FormCon
 import { NumberValidator } from '../shared/NumberValidator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Iproduct } from '../product-list/product';
-import { ProductserviceService } from '../productservice.service';
+import { ProductserviceService } from '../services/productservice.service';
 import { Subscription, Observable, fromEvent, merge } from 'rxjs';
 import { GenericValidator } from '../shared/GenericValidator';
 import { debounceTime } from 'rxjs/operators';
@@ -28,6 +28,7 @@ export class EditProductComponent implements OnInit, OnDestroy, AfterViewInit {
   private genericValidator: GenericValidator;
 
   errorMessage: string;
+  deleteBtnDisabled:boolean;
 
 
   constructor(private fb: FormBuilder, private acRoute: ActivatedRoute, private pService: ProductserviceService, private router: Router) {
@@ -72,10 +73,14 @@ export class EditProductComponent implements OnInit, OnDestroy, AfterViewInit {
     this.acRoute.paramMap.subscribe(
       params => {
         let id = params.get('id');
-        if (id === '0')
+        if (id === '0'){
+          this.deleteBtnDisabled=true;
           this.pageTitle = 'Add Product';
-        else
+        }
+        else{
+          this.deleteBtnDisabled=false;
           this.getProduct(id);
+        }
       }
     );
 
@@ -159,6 +164,12 @@ export class EditProductComponent implements OnInit, OnDestroy, AfterViewInit {
   deleteTag(index: number): void {
     this.tags.removeAt(index);
     this.tags.markAsDirty();
+  }
+
+  deleteProduct(){
+    this.pService.deleteProduct(this.product.productId).subscribe({
+     next:()=>{this.updateComplete()}
+    });
   }
 
 }

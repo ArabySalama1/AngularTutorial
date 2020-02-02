@@ -84,7 +84,7 @@
             [routerLink]="['/products']">
             Cancel
           </button>
-          <button class="btn btn-outline-warning" style="width:80px" type="button" title="Delete this product">
+          <button class="btn btn-outline-warning" style="width:80px" [disabled]="deleteBtnDisabled" type="button" title="Delete this product" (click)="deleteProduct()" >
             Delete
           </button>
         </div>

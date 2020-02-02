@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ConvertToSpacePipe } from '../product-list/ConvertToSpacePipe';
-import { StarsComponent } from '../stars/stars.component';
+import { StarsComponent } from '../shared/stars/stars.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { EditProductComponent } from '../edit-product/edit-product.component';
 
 import { ProductData } from './ProductData';
 
-
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { ProductData } from './ProductData';
     ProductListComponent,
     ProductDetailComponent,
     ConvertToSpacePipe,
-    EditProductComponent
+    EditProductComponent,
+    JwPaginationComponent
    
   ],
   imports: [
